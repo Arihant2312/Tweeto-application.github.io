@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dotted Black UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1e1e1e; /* Dark base color */
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
+                              radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen w-full">
+
+    <div class="min-h-screen relative">
+        <!-- Greeting Text -->
+        <div class="w-full flex justify-between items-center px-6">
+            <!-- Welcome Text -->
+            <h2 class="text-4xl font-semibold text-white">
+                👋 Welcome, <%= user.name %>!
+            </h2>
+        
+            <!-- Logout Button -->
+            <a href="/logout" class="bg-gradient-to-r from-teal-400 to-blue-500 text-white mt-4 py-2 px-4 rounded-lg border-2 border-transparent hover:border-teal-500 hover:bg-gradient-to-l hover:from-blue-500 hover:to-teal-400 transform transition duration-300 hover:scale-110">
+                Logout
+            </a>
+        </div>
+        
+      
+        <!-- Animated New Post Prompt -->
+        <div class="mt-3 flex space-x-2 text-3xl font-bold">
+          <span class="animate-word text-gradient delay-0">Create</span>
+          <span class="animate-word text-gradient delay-1">Your</span>
+          <span class="animate-word text-gradient delay-2">Thoughts</span>
+          <span class="animate-word text-gradient delay-3">in</span>
+          <span class="animate-word text-gradient delay-4">Style💬</span>
+        </div>
+      
+        <!-- Short Thoughts Form -->
+        <div class="mt-6 w-full max-w-md bg-opacity-70 bg-zinc-900 rounded-lg shadow-lg p-6 ml-6">
+          <form action="/post" method="post">
+              <textarea 
+                  class="w-full resize-none bg-transparent border-2 border-zinc-800 p-4 text-white text-lg rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none" 
+                  placeholder="Share your thoughts..." name="content"></textarea>
+              
+              <input 
+                  type="submit" 
+                  value="Create New Post" 
+                  name="submit" 
+                  class="mt-4 w-1/2 bg-teal-400 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-teal-500 transition duration-300"
+              >
+          </form>
+      </div>
+      
+
+        <!-- User Posts -->
+        <div class="mt-10 w-full">
+          <h3 class="animated-heading text-3xl ml-4 mb-3 font-bold animate-bounce-infinite text-gradient">
+            Your Posts
+        </h3>
+          <div class="w-full flex flex-wrap gap-6 mx-4">
+              <!-- Post -->
+               <% user.posts.reverse().forEach(function(post){ %>
+                <div class="post w-full mb-2 md:w-1/4 p-5 border-2 border-zinc-800 bg-zinc-900 rounded-lg shadow-lg">
+                  <h4 class="text-white  text-xl font-semibold">@<%=user.username%> </h4>
+                  <p class=" mt-2 mb-2 w-full resize-none bg-transparent border-2 border-zinc-800 p-4 text-white text-lg rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none"><%=post.content%></p>
+                  <div class="btn flex gap-4">
+                    <form action="/likes/<%=post._id%>" method="post">
+                      <a class="text-blue-500 text-start"  href="/likes/<%=post._id%>" ><%=post.likes.indexOf(user._id) === -1 ? "Like":"Unlike"%>❤</a>
+                      <a href="" class="text-red-400 ml-2 ">Edit</a>
+                      <div class="postlikes ml-10 text-cyan-500 inline-block"><%= post.likes.length%> Like👍</div>
+                    </form>
+                   
+          
+               
+                    
+                  </div>
+              </div>
+
+              <% }) %>
+              
+
+          
+      
+              <!-- Repeat as needed for additional posts -->
+          </div>
+      </div>
+      
+    </div>
+  
+
+    <!-- Animation and Gradient Style -->
+    <style>
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+    }
+
+      .animate-word {
+        opacity: 0;
+        animation: fadeIn 0.7s ease-out forwards;
+      }
+
+      .delay-0 {
+        animation-delay: 0s;
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      .delay-4 {
+        animation-delay: 0.8s;
+      }
+
+      .text-gradient {
+        background: linear-gradient(90deg, #ff7eb3, #ff758c, #fd5e53);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+    </style>
+   
+    <style>
+      /* Gradient Text Animation */
+      .animated-heading {
+          background: linear-gradient(90deg, #ff7eb3, #ff758c, #fd5e53);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gradientShift 3s infinite linear, bounceInfinite 1.5s infinite;
+      }
+  
+      @keyframes gradientShift {
+          0% {
+              background-position: 0% 50%;
+          }
+          50% {
+              background-position: 100% 50%;
+          }
+          100% {
+              background-position: 0% 50%;
+          }
+      }
+  
+      /* Bouncing Animation */
+      @keyframes bounceInfinite {
+          0%, 100% {
+              transform: translateY(0);
+          }
+          50% {
+              transform: translateY(-10px);
+          }
+      }
+  </style>
+    
+
+</body>
+</html>

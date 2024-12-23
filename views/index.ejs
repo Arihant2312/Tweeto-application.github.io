@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        body {
+            background: linear-gradient(270deg, #1e3a8a, #6b21a8, #9333ea, #3b82f6);
+            background-size: 400% 400%;
+            animation: backgroundAnimation 15s ease infinite;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-color: #1e3a8a;
+            background-size: 10px 10px;
+            min-height: 100vh; /* Ensure full height */
+            margin: 0; /* Remove default margin */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .pattern {
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            opacity: 0;
+            animation: meteor 5s linear infinite;
+        }
+
+        .pattern:nth-child(1) {
+            animation-delay: 0s;
+            left: 70%;
+        }
+
+        .pattern:nth-child(2) {
+            animation-delay: 1s;
+            left: 20%;
+        }
+
+        .pattern:nth-child(3) {
+            animation-delay: 2s;
+            left: 50%;
+        }
+
+        .pattern:nth-child(4) {
+            animation-delay: 3s;
+            left: 80%;
+        }
+
+        .pattern:nth-child(5) {
+            animation-delay: 4s;
+            left: 30%;
+        }
+    </style>
+</head>
+<body class="min-h-screen w-full gap-0 flex items-center justify-center  bg-gray-900">
+
+    <!-- Pattern Effect -->
+    <div class="pattern"></div>
+    <div class="pattern"></div>
+    <div class="pattern"></div>
+    <div class="pattern"></div>
+    <div class="pattern"></div>
+
+    <div class="w-full mt-1 max-w-md p-6 gap-1 bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-lg transform transition-all duration-500 animate-fadeIn">
+        <form 
+            action="/register" 
+            method="post" 
+            class="space-y-6"
+        >
+            <h2 class="text-4xl font-extrabold text-center text-white tracking-wide hover:scale-110 transform transition-transform duration-300">
+                Create Account
+            </h2>
+
+            <!-- Name Field -->
+            <div class="relative group">
+                <label class="block text-sm mt-1 font-medium text-gray-300 group-hover:text-white transition-colors duration-200" for="name">Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Enter your name"
+                    class="w-full px-4 py-2 mt-1 bg-gray-800 text-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    required
+                />
+            </div>
+
+            <!-- Username Field -->
+            <div class="relative group">
+                <label class="block text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-200" for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Choose a username"
+                    class="w-full px-4 py-2 mt-1 bg-gray-800 text-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    required
+                />
+            </div>
+
+            <!-- Password Field -->
+            <div class="relative group">
+                <label class="block text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-200" for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter a strong password"
+                    autocomplete="new-password"
+                    class="w-full px-4 py-2 mt-1 bg-gray-800 text-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    required
+                />
+            </div>
+
+            <!-- Email Field -->
+            <div class="relative group">
+                <label class="block text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-200" for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email"
+                    class="w-full px-4 py-2 mt-1 bg-gray-800 text-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    required
+                />
+            </div>
+
+            <!-- Age Field -->
+            <div class="relative group">
+                <label class="block text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-200" for="age">Age</label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    name="age" 
+                    placeholder="Enter your age"
+                    class="w-full px-4 py-2 mt-1 bg-gray-800 text-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    required
+                />
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+                type="submit" 
+                class="w-full py-3 px-6 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-purple-500 hover:to-pink-500 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 animate-glow"
+            >
+                Create Account
+            </button>
+            <div class=" mr-4 flex justify-end items-center space-x-2">
+                <p class="text-gray-400 text-lg">Already have an account?</p>
+                <a href="/login" class="bg-gray-800 text-gray-300 text-lg py-2 px-4 rounded-lg shadow-lg border border-gray-600 hover:bg-gray-700 hover:text-white transform transition duration-300 hover:scale-105 bg-blend-lighten">
+                    Login
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
